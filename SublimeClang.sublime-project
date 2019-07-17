@@ -1,0 +1,15 @@
+{
+	"folders":
+	[
+		{
+			"folder_exclude_patterns":
+			[
+				"backup",
+				"bin",
+				"obj",
+				".vs"
+			],
+			"path": "."
+		}
+	]
+}

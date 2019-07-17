@@ -1,0 +1,455 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"ro",
+				"rotAxis"
+			],
+			[
+				"tr",
+				"transformsBlock"
+			],
+			[
+				"glClear",
+				"glClearColor"
+			],
+			[
+				"op",
+				"optimize"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "SublimeClang.sublime-project",
+			"settings":
+			{
+				"buffer_size": 132,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "builddebug.bat",
+			"settings":
+			{
+				"buffer_size": 755,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "Packages/Makefile/Make.sublime-build",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/C++/C Single File.sublime-build",
+					""
+				],
+				[
+					"Packages/C++/C Single File.sublime-build",
+					"Run"
+				]
+			],
+			[
+				"Packages/C++/C Single File.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Makefile/Make.sublime-build",
+					""
+				],
+				[
+					"Packages/Makefile/Make.sublime-build",
+					"Clean"
+				]
+			],
+			[
+				"Packages/Makefile/Make.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"make clean",
+				"Build With: Make - Clean"
+			],
+			[
+				"make",
+				"Build With: Make"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"insall",
+				"Package Control: Install Package"
+			],
+			[
+				"Ins",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/dev/SublimeClang",
+		"/C/dev/SublimeClang/external"
+	],
+	"file_history":
+	[
+		"/C/dev/SublimeClang/main_win32.c",
+		"/D/work/projects/starcitizen/firesprite/batchfiles/psarc/data/orbis.cfg",
+		"/D/work/projects/starcitizen/CryEngine/Orbis/data/orbis.cfg",
+		"/C/Users/claire.rogers/AppData/Local/Temp/p4v/clairerogers-PC_192.168.1.222_1666/starcitizen/CryEngine/Engine/Shaders/HWScripts/CryFX/GpuSkinning#4.cfx",
+		"/C/dev/SublimeClang/SublimeClang.sublime-project",
+		"/C/dev/SublimeClang/main_win32.cpp",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/246.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/249.In.patched",
+		"/C/dev/ionEngine/ion/stdafx.h",
+		"/C/Users/claire.rogers/AppData/Roaming/Sublime Text 3/Packages/User/BuildDebug.sublime-build",
+		"/C/dev/SublimeClang/premake5.lua",
+		"/C/dev/SublimeClang/buildrelease.bat",
+		"/C/dev/GraphicsTest/GLTestAZDO/GraphicsTest.cpp",
+		"/C/Users/claire.rogers/Desktop/Temp - 4 Sony/GpuSkinningShader_Fixed.pssl",
+		"/C/Users/claire.rogers/Desktop/Temp - 4 Sony/GpuSkinningShader_Crashing.pssl",
+		"/C/dev/SublimeClang/ScopeStackAllocator.h",
+		"/C/dev/SublimeClang/builddebug.bat",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/252.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/250.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Orbis/dump5000c30000.pm4",
+		"/D/work/projects/starcitizen/CryEngine/USER/Shaders/Cache/D3D11/CGCShaders/GpuSkinning@Deformer_BShapes_DQSkinning.fxcb",
+		"/O/192.168.3.97/data/sce_coredumps/gpu_crash_analysis_0x0000004a/razorgpu-TEST00000-1556278689.rzrx.log",
+		"/O/192.168.3.97/data/sce_coredumps/gpu_crash_analysis_0x00000050/razorgpu-TEST00000-1556285740.rzrx.log",
+		"/O/192.168.3.97/data/sce_logs/log.bin",
+		"/C/dev/SublimeClang/build.bat",
+		"/C/dev/SublimeClang/main.cpp",
+		"/C/dev/premake-core/modules/vstudio/vs2010_vcxproj.lua",
+		"/D/work/projects/starcitizen/CryEngine/Orbis/psarc/libs.psarc.txt",
+		"/C/dev/ionEngine/premake5.lua",
+		"/D/work/projects/starcitizen_staging/CryEngine/Orbis/GPUCrash.txt",
+		"/C/dev/GENie/README.md",
+		"/D/work/projects/starcitizen_staging/CryEngine/Tools/RemoteShaderCompiler/Temp/21.In.patched",
+		"/C/Users/claire.rogers/Documents/StarCitizen_GettingStarted.txt",
+		"/C/Program Files (x86)/SCE/ORBIS SDKs/5.500/target/src/gnmx/cue.cpp",
+		"/C/dev/premake-core/modules/vstudio/vs2010_rules_targets.lua",
+		"/D/work/projects/starcitizen/firesprite/batchfiles/psarc/data/system.cfg",
+		"/D/work/projects/starcitizen_staging/CryEngine/Orbis/dump5000c30000.pm4",
+		"/D/work/projects/starcitizen_staging/CryEngine/Orbis/dump5000000000.pm4",
+		"/D/work/projects/starcitizen_staging/CryEngine/Tools/RemoteShaderCompiler/Temp/14.In.patched",
+		"/C/dev/ionEngine/assets/humanoid.fbx",
+		"/D/work/projects/starcitizen_staging/CryEngine/Orbis/dump5000410000.dcb",
+		"/D/work/projects/starcitizen_staging/CryEngine/Orbis/dump5000410000.pm4",
+		"/D/work/projects/starcitizen_staging/CryEngine/Tools/RemoteShaderCompiler/Temp/1.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/161.In.patched",
+		"/C/Users/claire.rogers/AppData/Roaming/Sublime Text 3/Packages/ShaderLanguages/ShaderLanguages.sublime-settings",
+		"/D/work/projects/starcitizen/CryEngine/Orbis/psarc/Libs.psarc",
+		"/D/work/projects/starcitizen/CryEngine/Orbis/psarc/files.txt",
+		"/C/dev/ionEngine/airhockey-data-oriented-design.txt",
+		"/C/dev/helloworld_premake/HelloWorld/HelloWorld.vcxproj",
+		"/C/dev/premake-core/modules/vstudio/vs200x_vcproj.lua",
+		"/C/dev/premake-core/modules/vstudio/vstudio.lua",
+		"/C/dev/orbis/orbis_vstudio.lua",
+		"/C/dev/orbis/orbis_sln2017.lua",
+		"/C/dev/premake-orbis/orbis_vcxproj.lua",
+		"/C/dev/premake-core/modules/vstudio/vs2017.lua",
+		"/C/dev/premake-orbis/orbis/orbis.lua",
+		"/C/dev/premake-orbis/orbis/_manifest.lua",
+		"/C/dev/premake-orbis/orbis/orbis_vstudio.lua",
+		"/C/dev/premake-orbis/orbis/orbis_sln2017.lua",
+		"/C/dev/premake-orbis/orbis/_preload.lua",
+		"/C/dev/premake-orbis/orbis/orbis_vcxproj.lua",
+		"/C/dev/helloworld_premake/HelloWorld.sln",
+		"/C/dev/orbis/_manifest.lua",
+		"/C/dev/premake-orbis/_manifest.lua",
+		"/C/dev/premake-orbis/_preload.lua",
+		"/C/dev/orbis/_preload.lua",
+		"/C/dev/orbis/orbis_vcxproj.lua",
+		"/C/dev/premake-orbis/orbis.lua",
+		"/C/dev/helloworld_premake/HelloWorld/HelloWorld.vcxproj.user",
+		"/C/dev/orbis/orbis.lua",
+		"/C/dev/helloworld_ps4/helloworld_ps4/helloworld_ps4.vcxproj",
+		"/D/work/dev/ionEngine/premake5.lua",
+		"/C/dev/premake-core/BUILD.txt",
+		"/C/dev/helloworld_premake/HelloWorld/HelloWorld.cpp",
+		"/C/dev/helloworld_premake/premake5.lua",
+		"/C/dev/premake-core/Bootstrap.mak",
+		"/C/dev/premake-core/build/bootstrap/Premake5.sln",
+		"/C/dev/premake-core/build/bootstrap/Premake5.vcxproj",
+		"/C/dev/premake-core/build/bootstrap/Premake5.vcxproj.user",
+		"/C/dev/premake-core/build/bootstrap/Premake5.vcxproj.filters",
+		"/D/work/projects/starcitizen/CryEngine/Orbis/parsed/shader_12.txt",
+		"/D/work/projects/starcitizen/CryEngine/Orbis/parsed/shader_13.txt",
+		"/D/work/projects/starcitizen/CryEngine/Orbis/parsed/shader_15.txt",
+		"/D/work/projects/starcitizen/CryEngine/Orbis/parsed/shader_17.txt",
+		"/D/work/projects/starcitizen/CryEngine/Orbis/parsed/shader_19.txt",
+		"/D/work/projects/starcitizen/CryEngine/Orbis/parsed/shader_0.txt",
+		"/D/work/projects/starcitizen/CryEngine/Orbis/parsed/shader_10.txt",
+		"/D/work/projects/starcitizen/CryEngine/Orbis/parsed/shader_2.txt",
+		"/D/work/projects/starcitizen/CryEngine/Orbis/out.txt",
+		"/D/work/projects/starcitizen/CryEngine/Engine/Shaders/HWScripts/CryFX/RParticleNoMat.cfx",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/3.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/2.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/1.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/7.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/6.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/5.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/4.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/53.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/52.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/51.In.patched",
+		"/C/Users/claire.rogers/Documents/EMailStu.txt",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Cache/Data/ShaderList_Orbis.txt",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/390.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/393.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/387.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/388.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/389.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/392.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/391.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Code/Tools/CrySCompileServer/CrySCompileServer/Cache/Data/ShaderList_Orbis.txt",
+		"/C/dev/ionEngine/ion/Types/HashTable.h",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/318.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/317.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/316.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/315.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/313.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/312.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/310.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/311.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/319.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/336.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/out.txt",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/8.In.patched",
+		"/D/work/projects/starcitizen/CryEngine/Engine/Shaders/cache/orbis/rparticle.cfib",
+		"/D/work/projects/starcitizen/CryEngine/Engine/Shaders/cache/orbis/rparticlenomat.cfxb",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Cache/Cache.dat",
+		"/C/dev/offendingShader/shader.pssl",
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/14.In.patched"
+	],
+	"find":
+	{
+		"height": 28.0
+	},
+	"find_in_files":
+	{
+		"height": 104.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"star",
+			"] Error",
+			"error",
+			"err",
+			"m_indexBufferName",
+			"key",
+			"] Error",
+			"Validate] Error",
+			"QA_Part",
+			".lib"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "SublimeClang.sublime-project",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 132,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								121,
+								121
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "builddebug.bat",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 755,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 28.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 127.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/Makefile/Make.sublime-build",
+	"project": "SublimeClang.sublime-project",
+	"replace":
+	{
+		"height": 52.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 382.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

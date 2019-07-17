@@ -1,0 +1,3 @@
+rem clang++ main_win32.cpp -g -O0 -Xclang -flto-visibility-public-std -march=native -D_DEBUG -D_CRT_SECURE_NO_WARNINGS -I external\glfw-3.3\include -I external\glew-2.1.0\include -I external\glm-0.9.9.5 -L external\glfw-3.3\lib-vc2017 -L external\glew-2.1.0\lib\Release\x64 -l glew32.lib -l glfw3dll.lib -l opengl32.lib -o SublimeClang.exe
+clang++ main_win32.cpp -c -g -O0 -Xclang -flto-visibility-public-std -march=native -D_DEBUG -D_CRT_SECURE_NO_WARNINGS -I external\glfw-3.3\include -I external\glew-2.1.0\include -I external\glm-0.9.9.5 -o SublimeClang.o
+clang++ -g -gno-column-info -Xlinker SublimeClang.o -L external\glfw-3.3\lib-vc2017 -L external\glew-2.1.0\lib\Release\x64 -l glew32.lib -l glfw3dll.lib -l opengl32.lib -m64 -o SublimeClang.exe
