@@ -35,7 +35,8 @@ project "SublimeClang"
 
    files 
    { 
-      "main_win32.c", 
+      "source/**.c", 
+      "source/**.h", 
    }
 
    excludes

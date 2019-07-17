@@ -1,2 +1,6 @@
 .git/
 .vs/
+bin/
+obj/
+*.make
+Makefile

@@ -67,10 +67,6 @@ mat4x4 mat4x4_frustum(float left, float right, float bottom, float top, float ne
 	float C = -(farZ + nearZ) / (farZ - nearZ);
 	float D = -(2.0f * farZ * nearZ) / (farZ - nearZ);
 
-//		float* __restrict xAxis = (float*)&result.m_xAxis;
-//		float* __restrict yAxis = (float*)&result.m_yAxis;
-//		float* __restrict zAxis = (float*)&result.m_zAxis;
-//		float* __restrict wAxis = (float*)&result.m_wAxis;
 	mat4x4 res;
 	res.xAxis = vec4_init(2.0f * nearZ / (right - left), 0.0f, 0.0f, 0.0f);
 	res.yAxis = vec4_init(0.0f, 2.0f * nearZ / (top - bottom), 0.0f, 0.0f);		

@@ -88,7 +88,6 @@ struct Vertex
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
-struct Vertex	*m_sourceVertexData;
 struct Vertex	*m_vertexBufferPtr;
 uint32_t *m_indexBufferPtr;
 _Bool m_bSpacePressed;
@@ -380,7 +379,8 @@ void initialize()
 
 	uint16_t stride = sizeof(struct Vertex);
 
-	struct Vertex vertexData[4] =
+	#define NUM_VERTICES (4)
+	struct Vertex vertexData[NUM_VERTICES] =
 	{
 		{-1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f},
 		{ 1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f},
@@ -388,18 +388,11 @@ void initialize()
 		{-1.0f,  1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f},
 	};
 
-//	m_sourceVertexData = (struct Vertex *)allocator.alloc(sizeof(struct Vertex) * 4);
-	m_sourceVertexData = (struct Vertex *)malloc(sizeof(struct Vertex) * 4);
 
 	glCreateBuffers(1, &m_vertexBufferName);
-//	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferName);
-//	glBufferData(GL_ARRAY_BUFFER, 4 * stride, vertexData, GL_STATIC_DRAW);
-//	glBufferData(GL_ARRAY_BUFFER, 4 * stride, vertexData, GL_STATIC_DRAW);
-	glNamedBufferStorage(m_vertexBufferName, 4 * stride, NULL, GL_MAP_WRITE_BIT | GL_MAP_PERSISTENT_BIT | GL_MAP_COHERENT_BIT);
-	m_vertexBufferPtr = (struct Vertex *)glMapNamedBufferRange(m_vertexBufferName, 0, 4 * stride, GL_MAP_WRITE_BIT | GL_MAP_PERSISTENT_BIT | GL_MAP_COHERENT_BIT);
-	memcpy(m_sourceVertexData, vertexData, stride * 4);
-	memcpy(m_vertexBufferPtr, vertexData, stride * 4);
-//	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glNamedBufferStorage(m_vertexBufferName, NUM_VERTICES * stride, NULL, GL_MAP_WRITE_BIT | GL_MAP_PERSISTENT_BIT | GL_MAP_COHERENT_BIT);
+	m_vertexBufferPtr = (struct Vertex *)glMapNamedBufferRange(m_vertexBufferName, 0, NUM_VERTICES * stride, GL_MAP_WRITE_BIT | GL_MAP_PERSISTENT_BIT | GL_MAP_COHERENT_BIT);
+	memcpy(m_vertexBufferPtr, vertexData, stride * NUM_VERTICES);
 
 	glGenVertexArrays(1, &m_vertexArrayObject);
 	glBindVertexArray(m_vertexArrayObject);
@@ -419,11 +412,7 @@ void initialize()
 	glNamedBufferStorage(m_indexBufferName, NUM_INDICES * sizeof(uint32_t), NULL, GL_MAP_WRITE_BIT | GL_MAP_PERSISTENT_BIT | GL_MAP_COHERENT_BIT);
 	m_indexBufferPtr = (uint32_t *)glMapNamedBufferRange(m_indexBufferName, 0, NUM_INDICES * sizeof(uint32_t), GL_MAP_WRITE_BIT | GL_MAP_PERSISTENT_BIT | GL_MAP_COHERENT_BIT);
 	memcpy(m_indexBufferPtr, indices, sizeof(uint32_t) * NUM_INDICES);
-	//	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBufferName);
-//	glBufferData(GL_ELEMENT_ARRAY_BUFFER, numIndices * sizeof(uint32_t), indices, GL_STATIC_DRAW);
-//	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-//	loadShader("blinnphong.vs.glsl", "blinnphong.fs.glsl", allocator);
 	loadShader("shaders/blinnphong.vs.glsl", "shaders/blinnphong.fs.glsl");
 }
 
@@ -445,7 +434,7 @@ void update()
 	mat4x4 viewMatrix = mat4x4_lookAt(eye, at, up);
 
 	const float fov = RADIANS(90.0f);
-	const float aspectRatio = 720.0f / 1280.0f; // / 720.0f;
+	const float aspectRatio = 720.0f / 1280.0f;
 	const float nearZ = 0.1f;
 	const float farZ = 100.0f;
 	const float focalLength = 1.0f / tanf(fov * 0.5f);
@@ -465,7 +454,6 @@ void update()
 
 	block->viewMatrix = viewMatrix;
 	block->projectionMatrix = projectionMatrix;
-//	block->viewProjMatrix = mat4x4_mul(&projectionMatrix, &viewMatrix);
 	mat4x4_mul((float *)&projectionMatrix, (float *)&viewMatrix, (float *)&block->viewProjMatrix);
 	glUnmapBuffer(GL_UNIFORM_BUFFER);
 
@@ -475,9 +463,6 @@ void update()
 	struct ModelMatrices *transformsBlock = (struct ModelMatrices *)glMapBufferRange(GL_SHADER_STORAGE_BUFFER, 0, sizeof(struct ModelMatrices), GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
 
 	float baseRotation = (float)glfwGetTime() * 50.0f;
-//	modelMatrix.SetRotation(Deg2Rad(baseRotation), Vector(0.0f, 0.0f, -1.0f));
-//	transformsBlock->modelMatrices[0] = modelMatrix;
-//	transformsBlock->modelMatrices[0].SetTranslate(Point(0.0f, 0.0f, 0.0f));
 	mat4x4 *instanceMatrix = &transformsBlock->modelMatrices[0];
 	vec4 rotAxis = vec4_init(0.0f, 0.0f, -1.0f, 0.0f);
 	mat4x4 transMat;
@@ -487,7 +472,6 @@ void update()
 	mat4x4_rotate(RADIANS(baseRotation), rotAxis, &rotMat);
 
 	mat4x4_mul((float *)&transMat, (float *)&rotMat, (float *)instanceMatrix);
-//	*instanceMatrix = mat4x4_mul(mat4x4_translate(vec4_init(0.0f, 0.0f, 0.0f, 1.0f)), mat4x4_rotate(RADIANS(baseRotation), rotAxis));
 
 	glUnmapBuffer(GL_SHADER_STORAGE_BUFFER);	
 }
@@ -528,9 +512,6 @@ void render()
 	glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, m_materialBuffer);
 
 	// Bind Vertex and Index Buffers.
-//	glBindVertexArray(m_pMesh->getVertexArrayObject());
-//	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_pMesh->getIndexBuffer());
-
 	glBindVertexArray(m_vertexArrayObject);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBufferName);
 
@@ -574,10 +555,8 @@ void checkForCompileErrors(GLuint shader, GLint shaderType)
 	}
 }
 
-//void loadShader(const char *vertexShaderName, const char *fragmentShaderName, ScopeStack& allocator)
 void loadShader(const char *vertexShaderName, const char *fragmentShaderName)
 {
-//	ScopeStack tempStack(allocator);
 
 	const char *compileStrings[2] = { NULL, NULL };
 		
@@ -585,12 +564,12 @@ void loadShader(const char *vertexShaderName, const char *fragmentShaderName)
 	if (vertexShaderName)
 	{
 		uint32_t vertexShader = glCreateShader(GL_VERTEX_SHADER);
-//		File *pFile = tempStack.newObject<File>(vertexShaderName, "rt", tempStack);
 		FILE *fptr = file_open(vertexShaderName, "rt");
 		size_t length = file_length(fptr);
-		char* vs = (char *)malloc(length); //NULL; //pFile->getData();
+		char* vs = (char *)malloc(length);
 		file_read(vs, length, fptr);
 		file_close(fptr);
+
 		compileStrings[0] = vs;
 		glShaderSource(vertexShader, 1, compileStrings, NULL);
 		glCompileShader(vertexShader);
@@ -603,10 +582,9 @@ void loadShader(const char *vertexShaderName, const char *fragmentShaderName)
 	if (fragmentShaderName)
 	{
 		uint32_t fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-//		File *pFile = tempStack.newObject<File>(fragmentShaderName, "rt", tempStack);
 		FILE *fptr = file_open(fragmentShaderName, "rt");
 		size_t length = file_length(fptr);
-		char* fs = (char *)malloc(length); //NULL; //pFile->getData();
+		char* fs = (char *)malloc(length);
 		file_read(fs, length, fptr);
 		file_close(fptr);
 
