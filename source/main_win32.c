@@ -23,6 +23,8 @@
 #include "mat4x4.h"
 #include "vec4.h"
 
+#include "mesh.h"
+
 #define NUM_X (1)
 #define NUM_Y (1)
 #define NUM_Z (1)
@@ -167,10 +169,12 @@ void update();
 void render();
 //void loadShader(const char *vertexShaderName, const char *fragmentShaderName, ScopeStack& allocator);
 void loadShader(const char *vertexShaderName, const char *fragmentShaderName);
+void loadMesh(const char *meshName);
+
 FILE *file_open(const char *filename, const char *mode);
 void file_close(FILE *fptr);
 size_t file_length(FILE *fptr);
-void file_read(char *buffer, size_t bytes, FILE *fptr);
+void file_read(void *buffer, size_t bytes, FILE *fptr);
 
 int main(int argc, char *argv[])
 {
@@ -361,8 +365,8 @@ void initialize()
 			for (uint32_t x = 0; x < NUM_X; ++x)
 			{
 				materials[materialIndex].diffuse[0] = 1.0f;
-				materials[materialIndex].diffuse[1] = green;
-				materials[materialIndex].diffuse[2] = blue;;
+				materials[materialIndex].diffuse[1] = 0.0f; //green;
+				materials[materialIndex].diffuse[2] = 1.0f; //blue/
 				materials[materialIndex].specular[0] = materials[materialIndex].specular[1] = materials[materialIndex].specular[2] = 0.7f;
 				materials[materialIndex].specularPower = 5.0f + 10.0f * x;
 				materialIndex++;
@@ -414,6 +418,8 @@ void initialize()
 	memcpy(m_indexBufferPtr, indices, sizeof(uint32_t) * NUM_INDICES);
 
 	loadShader("shaders/blinnphong.vs.glsl", "shaders/blinnphong.fs.glsl");
+	loadMesh("assets/torus.s3d");
+
 }
 
 	#define ION_PI (3.14159265359f)
@@ -469,7 +475,7 @@ void update()
 	mat4x4_translate(vec4_init(0.0f, 0.0f, 0.0f, 1.0f), &transMat);
 
 	mat4x4 rotMat;
-	mat4x4_rotate(RADIANS(baseRotation), rotAxis, &rotMat);
+	mat4x4_rotate(RADIANS(-baseRotation), rotAxis, &rotMat);
 
 	mat4x4_mul((float *)&transMat, (float *)&rotMat, (float *)instanceMatrix);
 
@@ -599,6 +605,59 @@ void loadShader(const char *vertexShaderName, const char *fragmentShaderName)
 	glLinkProgram(m_glslProgram);
 }
 
+void loadMesh(const char *meshName)
+{
+	FILE *fptr = file_open(meshName, "rt");
+	if (!fptr)
+	{
+		printf("Error: Unable to open file %s\n", meshName);
+		exit(1);
+	}
+
+	size_t fileLen = file_length(fptr);
+	uint8_t *buffer = malloc(fileLen);
+	file_read(buffer, fileLen, fptr);
+	fclose(fptr);
+
+	struct ModelHeader *header = (struct ModelHeader *)buffer;
+	uint32_t versionMajor = header->versionMajor;
+	uint32_t versionMinor = header->versionMinor;
+	bool bLoaded = false;
+	uint8_t *ptr = (uint8_t *)(buffer + sizeof(struct ModelHeader));
+	int32_t res = 0;
+	char fourCC[5] = { "NULL" };
+	while (!bLoaded)
+	{
+		struct ChunkId *chunk = (struct ChunkId *)ptr;
+		strncpy(fourCC, (char *)(&chunk->fourCC), 4);
+		switch (chunk->fourCC)
+		{
+		case kFourCC_TEXT:
+//			LoadTextureChunk(chunk);
+			break;
+		case kFourCC_MATL:
+			loadMaterialChunk(chunk); //, resourceManager);
+			break;
+		case kFourCC_SKEL:
+			loadSkeletonChunk(chunk); //, resource);
+			break;
+		case kFourCC_MESH:
+			res = loadMeshChunk(chunk); //, resource, vertexBuffer, vertexBufferOffset, indexBuffer, indexBufferOffset);
+			if (res >= 0)
+				bLoaded = true;
+			else
+			{
+				ptr = (uint8_t *)(buffer + sizeof(struct ModelHeader));
+				ptr -= chunk->size;
+			}
+			break;
+		default:
+			printf("Warning: Skipping unknown Chunk '%s' in file %s\n", fourCC, meshName);
+		}
+		ptr = ptr + chunk->size;
+	}
+}
+
 FILE *file_open(const char *filename, const char *mode)
 {
 	return fopen(filename, mode);
@@ -618,7 +677,7 @@ size_t file_length(FILE *fptr)
 	return length;
 }
 
-void file_read(char *buffer, size_t bytes, FILE *fptr)
+void file_read(void *buffer, size_t bytes, FILE *fptr)
 {
 	fread(buffer, sizeof(char), bytes, fptr);	
 }

@@ -31,7 +31,7 @@ project "SublimeClang"
    debugdir "../../"
 --   dependson { "ion" }
 --   pchheader "stdafx.h"
---   pchsource "ionGfx/stdafx.cpp"
+--   pchsource "source/stdafx.cpp"
 
    files 
    { 

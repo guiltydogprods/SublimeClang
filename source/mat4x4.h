@@ -26,7 +26,7 @@ typedef struct mat4x4
 #define VecShuffle_0101(vec1, vec2)        _mm_movelh_ps(vec1, vec2)
 #define VecShuffle_2323(vec1, vec2)        _mm_movehl_ps(vec2, vec1)
 
-void mat4x4_orthoInverse(mat4x4 *mat, mat4x4 *invMat)
+inline void mat4x4_orthoInverse(mat4x4 *mat, mat4x4 *invMat)
 {
 	// transpose 3x3, we know m03 = m13 = m23 = 0
 	__m128 t0 = VecShuffle_0101(mat->xAxis, mat->yAxis); // 00, 01, 10, 11
@@ -42,7 +42,7 @@ void mat4x4_orthoInverse(mat4x4 *mat, mat4x4 *invMat)
 	invMat->wAxis = _mm_sub_ps(_mm_setr_ps(0.f, 0.f, 0.f, 1.f), invMat->wAxis);
 }
 
-mat4x4 mat4x4_lookAt(vec4 eye, vec4 at, vec4 up)
+inline mat4x4 mat4x4_lookAt(vec4 eye, vec4 at, vec4 up)
 {
 	const vec4 zAxis = vec4_normalize(vec4_sub(eye, at));
 	const vec4 xAxis = vec4_normalize(vec4_cross(up, zAxis));
@@ -60,7 +60,7 @@ mat4x4 mat4x4_lookAt(vec4 eye, vec4 at, vec4 up)
 	return res;
 }
 
-mat4x4 mat4x4_frustum(float left, float right, float bottom, float top, float nearZ, float farZ)
+inline mat4x4 mat4x4_frustum(float left, float right, float bottom, float top, float nearZ, float farZ)
 {
 	float A = (right + left) / (right - left);
 	float B = (top + bottom) / (top - bottom);
@@ -76,7 +76,7 @@ mat4x4 mat4x4_frustum(float left, float right, float bottom, float top, float ne
 	return res;
 }
 
-void mat4x4_translate(vec4 translate, mat4x4 *restrict res)
+inline void mat4x4_translate(vec4 translate, mat4x4 *restrict res)
 {
 	res->xAxis = vec4_init(1.0f, 0.0f, 0.0f, 0.0f);
 	res->yAxis = vec4_init(0.0f, 1.0f, 0.0f, 0.0f);
@@ -84,7 +84,7 @@ void mat4x4_translate(vec4 translate, mat4x4 *restrict res)
 	res->wAxis = translate;
 }
 
-void mat4x4_rotate(float angle, vec4 axis, mat4x4 *restrict res)
+inline void mat4x4_rotate(float angle, vec4 axis, mat4x4 *restrict res)
 {
 	__attribute__ ((aligned(16))) float axisMem[4] = {};
 	vec4_store(axisMem, axis);
@@ -137,7 +137,7 @@ mat4x4 mat4x4_transform(mat4x4 m, vec4 vec)
 }
 */
 
-mat4x4 mat4x4_mul(float *restrict A, float *restrict B, float *restrict C)
+inline mat4x4 mat4x4_mul(float *restrict A, float *restrict B, float *restrict C)
 {
 	mat4x4 res;
 

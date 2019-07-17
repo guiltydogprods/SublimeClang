@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"file",
+				"fileLen"
+			],
+			[
+				"file_",
+				"file_length"
+			],
+			[
+				"NU",
+				"NUM_VERTICES"
+			],
+			[
 				"ro",
 				"rotAxis"
 			],
@@ -33,10 +45,119 @@
 			}
 		},
 		{
+			"file": ".gitignore",
+			"settings":
+			{
+				"buffer_size": 36,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": ".gitattributes",
+			"settings":
+			{
+				"buffer_size": 208,
+				"line_ending": "Windows"
+			}
+		},
+		{
 			"file": "builddebug.bat",
 			"settings":
 			{
-				"buffer_size": 755,
+				"buffer_size": 787,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "source/main_win32.c",
+			"settings":
+			{
+				"buffer_size": 19885,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "#pragma once\n\n#ifndef ION_MAKEFOURCC\n#define ION_MAKEFOURCC(ch0, ch1, ch2, ch3)\t\t\t\t\t\t\t\t\t\t\t\\\n\t\t\t\t\t((uint32_t)(uint8_t)(ch0) |\t((uint32_t)(uint8_t)(ch1) << 8) |\t\\\n\t\t\t\t\t((uint32_t)(uint8_t)(ch2) << 16) | ((uint32_t)(uint8_t)(ch3) << 24 ))\n#endif //defined(ION_MAKEFOURCC)\n\nconst int kVersionMajor = 0;\nconst int kVersionMinor = 2;\nconst uint32_t kFourCC_SCNE = ION_MAKEFOURCC('S', 'C', 'N', 'E');\t// Scene Chunk FourCC\nconst uint32_t kFourCC_TEXT = ION_MAKEFOURCC('T', 'E', 'X', 'T');\t// Texture Chunk FourCC\nconst uint32_t kFourCC_MATL = ION_MAKEFOURCC('M', 'A', 'T', 'L');\t// Material Chunk FourCC\nconst uint32_t kFourCC_SKEL = ION_MAKEFOURCC('S', 'K', 'E', 'L');\t// Skeleton Chunk FourCC\nconst uint32_t kFourCC_MESH = ION_MAKEFOURCC('M', 'E', 'S', 'H');\t// Mesh Chunk FourCC\n\t\nstruct ChunkId\n{\n\tuint32_t fourCC;\n\tuint32_t size;\n} ChunkId;\n\nstruct ModelHeader\n{\n\tstruct ChunkId\tchunkId;\n\tuint32_t\t\tversionMajor;\n\tuint32_t\t\tversionMinor;\n};\n\nstruct RenderableInfo\n{\n\tuint32_t\tnumVertices;\n\tuint32_t\tnumIndices;\n\tuint32_t\tmaterialHash;\n\tfloat\t\taabbMinX;\n\tfloat\t\taabbMinY;\n\tfloat\t\taabbMinZ;\n\tfloat\t\taabbMaxX;\n\tfloat\t\taabbMaxY;\n\tfloat\t\taabbMaxZ;\n\tuint32_t\tverticesOffset;\n\tuint32_t\tindicesOffset;\n};\n\nstruct MeshInfo\n{\n\tmat4x4\t\tworldMatrix;\n\tfloat\t\taabbMinX;\n\tfloat\t\taabbMinY;\n\tfloat\t\taabbMinZ;\n\tfloat\t\taabbMaxX;\n\tfloat\t\taabbMaxY;\n\tfloat\t\taabbMaxZ;\n\tuint32_t\tnumRenderables;\n\tuint32_t\tnumChildren;\n};\n\nstruct MeshChunk\n{\n\tstruct ChunkId\t\tchunkId;\n\tuint32_t\tnumMeshes;\n};\n\nstruct TextureInfo\n{\n\tuint32_t width;\n\tuint32_t height;\n\tuint32_t textureOffset;\n};\n\nstruct TextureChunk\n{\n\tstruct ChunkId chunkId;\n\tuint32_t numTextures;\n};\n\nstruct MaterialInfo\n{\n\tfloat\t\tdiffuse[3];\n\tfloat\t\tambient[3];\n\tfloat\t\tspecular[4];\n\tfloat\t\talpha;\n\tuint32_t\tflags;\n\tuint32_t\temissiveMapHash;\n\tuint32_t\tdiffuseMapHash;\n\tuint32_t\tnormalMapHash;\n\tuint32_t\theightMapHash;\n};\n\nstruct MaterialInfoV1\n{\n\tfloat\t\tdiffuse[3];\n\tfloat\t\tambient[3];\n\tfloat\t\tspecular[4];\n\tfloat\t\talpha;\n\tuint32_t\tflags;\n\tfloat\t\treflectVal;\n\tuint32_t\tdiffuseMapHash;\n\tuint32_t\tnormalMapHash;\n};\n\nstruct MaterialChunk\n{\n\tstruct ChunkId chunkId;\n\tuint32_t numMaterials;\n};\n\nstruct MeshNode\n{\n\tint32_t\t m_parentId;\n\tuint32_t m_numRenderables;\n\tuint32_t m_numChildren;\n};\n\nstruct SkeletonChunk\n{\n\tstruct ChunkId chunkId;\n\tuint32_t numBones;\n};\n",
+			"file": "source/mesh.h",
+			"file_size": 2403,
+			"file_write_time": 132078504673327385,
+			"settings":
+			{
+				"buffer_size": 2284,
+				"encoding": "UTF-8",
+				"line_ending": "Windows",
+				"name": "#pragma once"
+			}
+		},
+		{
+			"file": "shaders/blinnphong.vs.glsl",
+			"settings":
+			{
+				"buffer_size": 844,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "shaders/blinnphong.fs.glsl",
+			"settings":
+			{
+				"buffer_size": 866,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Claire/AppData/Roaming/Sublime Text 3/Packages/Terminus/README.md",
+			"settings":
+			{
+				"buffer_size": 9233,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "external/glfw-3.3/LICENSE.md",
+			"settings":
+			{
+				"buffer_size": 924,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/C/Users/Claire/AppData/Roaming/Sublime Text 3/Packages/User/MakeDebug.sublime-build",
+			"settings":
+			{
+				"buffer_size": 86,
+				"encoding": "UTF-8",
+				"line_ending": "Windows",
+				"name": "untitled.sublime-build"
+			}
+		},
+		{
+			"file": "source/mat4x4.h",
+			"settings":
+			{
+				"buffer_size": 5260,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "premake5.lua",
+			"settings":
+			{
+				"buffer_size": 1448,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/dev/ionEngine/premake5.lua",
+			"settings":
+			{
+				"buffer_size": 12787,
 				"line_ending": "Windows"
 			}
 		}
@@ -85,6 +206,22 @@
 		"selected_items":
 		[
 			[
+				"term",
+				"Terminus: Open Default Shell in Panel"
+			],
+			[
+				"terminu",
+				"Terminus: Open Default Shell in Panel"
+			],
+			[
+				"tem",
+				"Terminus: Open Default Shell in View"
+			],
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			],
+			[
 				"make clean",
 				"Build With: Make - Clean"
 			],
@@ -109,9 +246,11 @@
 	},
 	"console":
 	{
-		"height": 0.0,
+		"height": 165.0,
 		"history":
 		[
+			"make",
+			"clear"
 		]
 	},
 	"distraction_free":
@@ -126,10 +265,16 @@
 	"expanded_folders":
 	[
 		"/C/dev/SublimeClang",
-		"/C/dev/SublimeClang/external"
+		"/C/dev/SublimeClang/external",
+		"/C/dev/SublimeClang/source"
 	],
 	"file_history":
 	[
+		"/C/Users/Claire/AppData/Roaming/Sublime Text 3/Packages/User/make.sublime-build",
+		"/C/dev/SublimeClang/SublimeClang.debugTarget",
+		"/C/Users/Claire/AppData/Roaming/Sublime Text 3/Packages/Terminus/README.md",
+		"/C/dev/SublimeClang/external/glfw-3.3/LICENSE.md",
+		"/C/dev/SublimeClang/external/glfw-3.3/docs/html/spaces.svg",
 		"/C/dev/SublimeClang/main_win32.c",
 		"/D/work/projects/starcitizen/firesprite/batchfiles/psarc/data/orbis.cfg",
 		"/D/work/projects/starcitizen/CryEngine/Orbis/data/orbis.cfg",
@@ -252,12 +397,7 @@
 		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/319.In.patched",
 		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/336.In.patched",
 		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/out.txt",
-		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/8.In.patched",
-		"/D/work/projects/starcitizen/CryEngine/Engine/Shaders/cache/orbis/rparticle.cfib",
-		"/D/work/projects/starcitizen/CryEngine/Engine/Shaders/cache/orbis/rparticlenomat.cfxb",
-		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Cache/Cache.dat",
-		"/C/dev/offendingShader/shader.pssl",
-		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/14.In.patched"
+		"/D/work/projects/starcitizen/CryEngine/Tools/RemoteShaderCompiler/Temp/8.In.patched"
 	],
 	"find":
 	{
@@ -265,7 +405,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 104.0,
+		"height": 105.0,
 		"where_history":
 		[
 			""
@@ -276,6 +416,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"m_sourceVertexData",
 			"star",
 			"] Error",
 			"error",
@@ -303,7 +444,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -332,16 +473,44 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 13,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "builddebug.bat",
-					"semi_transient": true,
+					"file": ".gitignore",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 755,
+						"buffer_size": 36,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								36,
+								36
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Git Formats/Git Ignore.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": ".gitattributes",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 208,
 						"regions":
 						{
 						},
@@ -354,13 +523,331 @@
 						],
 						"settings":
 						{
+							"syntax": "Packages/Git Formats/Git Attributes.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "builddebug.bat",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 787,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								787,
+								787
+							]
+						],
+						"settings":
+						{
 							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "source/main_win32.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 19885,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								18813,
+								18813
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 11787.0,
+						"zoom_level": 1.0
+					},
 					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "source/mesh.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2284,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								837,
+								837
+							]
+						],
+						"settings":
+						{
+							"auto_name": "#pragma once",
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 113.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "shaders/blinnphong.vs.glsl",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 844,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								563,
+								563
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 82.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "shaders/blinnphong.fs.glsl",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 866,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 411.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "/C/Users/Claire/AppData/Roaming/Sublime Text 3/Packages/Terminus/README.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9233,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "external/glfw-3.3/LICENSE.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 924,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								660,
+								661
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "/C/Users/Claire/AppData/Roaming/Sublime Text 3/Packages/User/MakeDebug.sublime-build",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 86,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								53,
+								53
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "source/mat4x4.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5260,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3574,
+								3574
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 344.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "premake5.lua",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1448,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1020,
+								1020
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Lua/Lua.sublime-syntax",
+							"tab_size": 3,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 335.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "/C/dev/ionEngine/premake5.lua",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 12787,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2546,
+								2546
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Lua/Lua.sublime-syntax",
+							"tab_size": 3,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1374.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
 					"type": "text"
 				}
 			]
@@ -397,6 +884,34 @@
 		]
 	},
 	"menu_visible": true,
+	"output.Terminus":
+	{
+		"height": 133.0
+	},
+	"output.Terminus 2":
+	{
+		"height": 133.0
+	},
+	"output.Terminus 3":
+	{
+		"height": 133.0
+	},
+	"output.Terminus 4":
+	{
+		"height": 133.0
+	},
+	"output.Terminus 5":
+	{
+		"height": 133.0
+	},
+	"output.Terminus 6":
+	{
+		"height": 133.0
+	},
+	"output.Terminus 7":
+	{
+		"height": 133.0
+	},
 	"output.exec":
 	{
 		"height": 127.0
@@ -405,7 +920,7 @@
 	{
 		"height": 0.0
 	},
-	"pinned_build_system": "Packages/Makefile/Make.sublime-build",
+	"pinned_build_system": "Packages/User/MakeDebug.sublime-build",
 	"project": "SublimeClang.sublime-project",
 	"replace":
 	{
@@ -418,6 +933,14 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"",
+				"source\\main_win32.c"
+			],
+			[
+				"bli",
+				"shaders\\blinnphong.fs.glsl"
+			]
 		],
 		"width": 0.0
 	},
@@ -447,7 +970,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 382.0,
+	"side_bar_width": 242.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

@@ -1,4 +1,6 @@
 #pragma once
+//#ifndef VEC4_H
+//#define VEC4_H
 
 //#include <x86intrin.h>
 #include <smmintrin.h>
@@ -25,12 +27,12 @@ inline vec4 vec4_add(vec4 v1, vec4 v2)
 	return _mm_add_ps(v1, v2);	
 }
 
-__attribute__((always_inline)) vec4 vec4_sub(vec4 v1, vec4 v2)
+inline vec4 vec4_sub(vec4 v1, vec4 v2)
 {
 	return _mm_sub_ps(v1, v2);	
 }
 
-__attribute__((always_inline)) vec4 vec4_scale(vec4 v1, vec4 v2)
+inline vec4 vec4_scale(vec4 v1, vec4 v2)
 {
 	return _mm_sub_ps(v1, v2);	
 }
@@ -41,13 +43,13 @@ inline vec4 vec4_dot(vec4 v1, vec4 v2)
 	return _mm_dp_ps(v1, v2, 0xff);
 }
 
-__attribute__((always_inline)) vec4 vec4_cross(vec4 a, vec4 b)
+inline vec4 vec4_cross(vec4 a, vec4 b)
 {
 	return _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(a, a, _MM_SHUFFLE(3, 0, 2, 1)), _mm_shuffle_ps(b, b, _MM_SHUFFLE(3, 1, 0, 2))), 
 		   			  _mm_mul_ps(_mm_shuffle_ps(a, a, _MM_SHUFFLE(3, 1, 0, 2)), _mm_shuffle_ps(b, b, _MM_SHUFFLE(3, 0, 2, 1))));
 }
 
-__attribute__((always_inline)) vec4 vec4_normalize(vec4 v)
+inline vec4 vec4_normalize(vec4 v)
 {
 	// 0x7F = 0111 1111 ~ means we don't want the w-component multiplied
 	// and the result written to all 4 components
@@ -59,3 +61,5 @@ __attribute__((always_inline)) vec4 vec4_normalize(vec4 v)
 	// vec * rsqrt(dot(vec, vec))
 	return _mm_mul_ps(v, dp);	
 }
+
+//#endif
