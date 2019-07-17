@@ -1,6 +1,4 @@
 #pragma once
-//#ifndef MESH_H
-//#define MESH_H
 
 #ifndef ION_MAKEFOURCC
 #define ION_MAKEFOURCC(ch0, ch1, ch2, ch3)											\
@@ -61,8 +59,8 @@ struct MeshInfo
 
 struct MeshChunk
 {
-	struct ChunkId		chunkId;
-	uint32_t	numMeshes;
+	struct ChunkId	chunkId;
+	uint32_t		numMeshes;
 };
 
 struct TextureInfo
@@ -74,8 +72,8 @@ struct TextureInfo
 
 struct TextureChunk
 {
-	struct ChunkId chunkId;
-	uint32_t numTextures;
+	struct ChunkId 	chunkId;
+	uint32_t 		numTextures;
 };
 
 struct MaterialInfo
@@ -105,27 +103,28 @@ struct MaterialInfoV1
 
 struct MaterialChunk
 {
-	struct ChunkId chunkId;
-	uint32_t numMaterials;
+	struct ChunkId 	chunkId;
+	uint32_t 		numMaterials;
 };
 
 struct MeshNode
 {
-	int32_t	 m_parentId;
-	uint32_t m_numRenderables;
-	uint32_t m_numChildren;
+	int32_t	 parentId;
+	uint32_t numRenderables;
+	uint32_t numChildren;
 };
 
 struct SkeletonChunk
 {
-	struct ChunkId chunkId;
-	uint32_t numBones;
+	struct chunkId 	chunkId;
+	uint32_t 		numBones;
 };
 
+/*
 void loadTextureChunk(struct ChunkId* chunk);
 void loadMaterialChunk(struct ChunkId *chunk); //, const ResourceManager& resourceManager);
 void loadSkeletonChunk(struct ChunkId *chunk); //, const MeshResourceInfo& resource);
 int32_t loadMeshChunk(struct ChunkId *chunk); //, const MeshResourceInfo& resource, VertexBuffer& vertexBuffer, int64_t& vertexBufferOffset, IndexBuffer& indexBuffer, int64_t& indexBufferOffset);
 void loadMeshChunkRecursive(uint8_t* ptr); //, uint32_t& renderableIndex, uint32_t& nodeIndex, int32_t parentIndex, VertexBuffer& vertexBuffer, int64_t& vertexBufferOffset, IndexBuffer& indexBuffer, int64_t& indexBufferOffset);
-
-//#endif //MESH_H
+*/
+void loadMesh(const char *meshName);
