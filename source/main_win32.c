@@ -8,18 +8,9 @@
 #include <GL/wglew.h>
 #include <GL/gl.h>
 #include <GLFW/glfw3.h>
-#if 0
-#define GLM_FORCE_RADIANS
-#define GLM_FORCE_DEPTH_ZERO_TO_ONE
-#include "glm/glm.hpp"
-#include "glm/gtc/matrix_transform.hpp"
-#define GLM_ENABLE_EXPERIMENTAL
-#include "glm/gtx/transform.hpp"
-
-#include "ScopeStackAllocator.h"
-#endif
 
 #include <Memoryapi.h>
+#include "file.h"
 #include "mat4x4.h"
 #include "vec4.h"
 
@@ -30,19 +21,8 @@
 #define NUM_Z (1)
 #define NUM_DRAWS (NUM_X * NUM_Y * NUM_Z)
 
-//Camera	*m_pCamera;
-//Shader	*m_pBlinnPhongShader;
-//Shader	*m_pNoTransformShader;
-//Shader	*m_pCullShader;
-//Mesh	*m_pMesh;
-
-//class File;
-
 struct Transforms
 {
-//	glm::mat4x4 viewMatrix;
-//	glm::mat4x4	projectionMatrix;
-//	glm::mat4x4	viewProjMatrix;
 	mat4x4 viewMatrix;
 	mat4x4 projectionMatrix;
 	mat4x4 viewProjMatrix;
@@ -123,61 +103,46 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 	}
 }
 
-#if 0
-class File
-{
-public:
-	File(const char *filename, const char *mode, ScopeStack &scopeStack)
-		: m_buffer(nullptr)
-		, m_fptr(fopen(filename, mode))
-	{
-		if (m_fptr != NULL)
-		{
-			printf("File opened ok: Reading data.\n");
-			fseek(m_fptr, 0, SEEK_END);
-			m_size = ftell(m_fptr);
-			rewind(m_fptr);
-			m_buffer = static_cast<char *>(scopeStack.alloc(m_size+1));
-			memset(m_buffer, 0, m_size);
-			size_t numBytesRead = 0;
-			numBytesRead = fread(m_buffer, 1, m_size, m_fptr);
-			m_buffer[numBytesRead] = '\0';
-		}
-	}
-
-	~File()
-	{
-		printf("File dtor\n");
-		fclose(m_fptr);
-	}
-
-	char *getData()
-	{
-		return m_buffer;
-	}
-
-private:
-	FILE	*m_fptr;
-	size_t	m_size;
-	char	*m_buffer;
-};
-#endif
-
-//void initialize(ScopeStack& allocator);
 void initialize();
 void update();
 void render();
-//void loadShader(const char *vertexShaderName, const char *fragmentShaderName, ScopeStack& allocator);
 void loadShader(const char *vertexShaderName, const char *fragmentShaderName);
-void loadMesh(const char *meshName);
 
+/*
 FILE *file_open(const char *filename, const char *mode);
 void file_close(FILE *fptr);
 size_t file_length(FILE *fptr);
 void file_read(void *buffer, size_t bytes, FILE *fptr);
+*/
+
+typedef struct test_struct
+{
+	int a;
+	float b;
+	char *string;
+} test_struct;
+
+void test_func(const test_struct *ts)
+{
+	printf(".a = %d\n", ts->a);
+	printf(".b = %f\n", ts->b);
+	printf(".string = %s\n", ts->string);
+}
 
 int main(int argc, char *argv[])
 {
+	test_struct ts = {
+		.a = 1,
+		.b = 2.0f,
+		.string = "Hello World!"
+	};
+
+	test_func(&(test_struct){
+		.b = 3.1f,
+		.a = 2,
+		.string = "A new string"
+	});
+
 	if (!glfwInit())
 		exit(EXIT_FAILURE);
 
@@ -241,8 +206,6 @@ int main(int argc, char *argv[])
 
 	size_t memorySize = 32 * 1024 * 1024;
 	uint8_t *memoryBlock = (uint8_t *)_aligned_malloc(memorySize, 32);
-//	LinearAllocator allocator(memoryBlock, memorySize);
-//	ScopeStack systemAllocator(allocator);
 
 	__attribute__ ((aligned(16))) float data[8] = 
 	{
@@ -263,8 +226,6 @@ int main(int argc, char *argv[])
 	printf("SIMD Result:  %.3f, %.3f, %.3f, %.3f\n", resultData[0], resultData[1], resultData[2], resultData[3]);
 	printf("SIMD Result2: %.3f, %.3f, %.3f, %.3f\n", resultData2[0], resultData2[1], resultData2[2], resultData2[3]);
 
-
-//	initialize(systemAllocator);
 	initialize();
 	while (!glfwWindowShouldClose(window))
 	{
@@ -299,10 +260,10 @@ int main(int argc, char *argv[])
 void initialize()
 {
 #ifdef _DEBUG
-		glEnable(GL_DEBUG_OUTPUT);
-		glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
-		glDebugMessageCallback(openglCallbackFunction, NULL);
-		glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, NULL, true);
+	glEnable(GL_DEBUG_OUTPUT);
+	glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+	glDebugMessageCallback(openglCallbackFunction, NULL);
+	glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, NULL, true);
 #endif
 
 	static _Bool waitingForDebugger = true;
@@ -418,14 +379,15 @@ void initialize()
 	memcpy(m_indexBufferPtr, indices, sizeof(uint32_t) * NUM_INDICES);
 
 	loadShader("shaders/blinnphong.vs.glsl", "shaders/blinnphong.fs.glsl");
-	loadMesh("assets/torus.s3d");
 
+	struct Mesh mesh = {};
+//	loadMesh("assets/torus.s3d", &mesh);
 }
 
-	#define ION_PI (3.14159265359f)
-	#define ION_PI_OVER_180 (ION_PI / 180.0f)
+#define ION_PI (3.14159265359f)
+#define ION_PI_OVER_180 (ION_PI / 180.0f)
 	
-	#define RADIANS(x) (x * ION_PI_OVER_180)
+#define RADIANS(x) (x * ION_PI_OVER_180)
 	
 void update()
 {
@@ -453,10 +415,8 @@ void update()
 	mat4x4 projectionMatrix = mat4x4_frustum(left, right, bottom, top, nearZ, farZ);
 
 	glBindBufferBase(GL_UNIFORM_BUFFER, 0, m_transformsBuffer);
-	struct Transforms *block = (struct Transforms *)glMapBufferRange(GL_UNIFORM_BUFFER,
-		0,
-		sizeof(struct Transforms),
-		GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
+	struct Transforms *block = (struct Transforms *)glMapBufferRange(GL_UNIFORM_BUFFER, 0, sizeof(struct Transforms),
+																	 GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
 
 	block->viewMatrix = viewMatrix;
 	block->projectionMatrix = projectionMatrix;
@@ -466,7 +426,9 @@ void update()
 	mat4x4 modelMatrix;
 	// Bind and write model matrices buffer.
 	glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, m_modelMatricesBuffer);
-	struct ModelMatrices *transformsBlock = (struct ModelMatrices *)glMapBufferRange(GL_SHADER_STORAGE_BUFFER, 0, sizeof(struct ModelMatrices), GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
+	struct ModelMatrices *transformsBlock = (struct ModelMatrices *)glMapBufferRange(GL_SHADER_STORAGE_BUFFER, 0, sizeof(struct ModelMatrices), 
+
+																					 GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
 
 	float baseRotation = (float)glfwGetTime() * 50.0f;
 	mat4x4 *instanceMatrix = &transformsBlock->modelMatrices[0];

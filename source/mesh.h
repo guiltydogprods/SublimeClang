@@ -116,15 +116,37 @@ struct MeshNode
 
 struct SkeletonChunk
 {
-	struct chunkId 	chunkId;
+	struct ChunkId 	chunkId;
 	uint32_t 		numBones;
 };
+	
+typedef struct Renderable
+{
+	uint32_t	firstVertex;
+	uint32_t	firstIndex;
+	uint32_t	indexCount;
+	int32_t		materialIndex;
+} Renderable;
 
-/*
-void loadTextureChunk(struct ChunkId* chunk);
-void loadMaterialChunk(struct ChunkId *chunk); //, const ResourceManager& resourceManager);
-void loadSkeletonChunk(struct ChunkId *chunk); //, const MeshResourceInfo& resource);
-int32_t loadMeshChunk(struct ChunkId *chunk); //, const MeshResourceInfo& resource, VertexBuffer& vertexBuffer, int64_t& vertexBufferOffset, IndexBuffer& indexBuffer, int64_t& indexBufferOffset);
-void loadMeshChunkRecursive(uint8_t* ptr); //, uint32_t& renderableIndex, uint32_t& nodeIndex, int32_t parentIndex, VertexBuffer& vertexBuffer, int64_t& vertexBufferOffset, IndexBuffer& indexBuffer, int64_t& indexBufferOffset);
-*/
-void loadMesh(const char *meshName);
+struct Mesh
+{
+	float		aabbMin[3];
+	float		aabbMax[3];
+	uint32_t	numNodes;
+	uint32_t	numRenderables;
+	uint32_t	numTextures;
+	uint32_t	numMaterials;
+	uint32_t	numBones;
+	uint32_t	versionMajor;
+	uint32_t	versionMinor;
+	struct MeshNode	*hierarchy;
+//	HashTable<uint32_t, uint32_t> *m_boneHashes;
+	mat4x4	*bones;
+	mat4x4	*inverseBindPose;
+	mat4x4	*transforms;
+	struct Renderable	*renderables;
+	struct Material	*materials;
+};
+
+// Public function prototypes.
+void loadMesh(const char *meshName, struct Mesh *mesh);
