@@ -226,6 +226,10 @@ int main(int argc, char *argv[])
 	printf("SIMD Result:  %.3f, %.3f, %.3f, %.3f\n", resultData[0], resultData[1], resultData[2], resultData[3]);
 	printf("SIMD Result2: %.3f, %.3f, %.3f, %.3f\n", resultData2[0], resultData2[1], resultData2[2], resultData2[3]);
 
+ //	typedef float vec4f __attribute__((vector_size(4 * sizeof(float))));
+    vec4 a = { 1.0, 2.0, 3.0, 4.0 }, b = { 5.0, 6.0, 7.0, 8.0 };
+    vec4 c = (2.0 * a) + (a + b * b);  // with -ffast-math, this will emit a fused multiply-and-add (FMA)
+
 	initialize();
 	while (!glfwWindowShouldClose(window))
 	{
@@ -396,9 +400,9 @@ void update()
 	float cosa = 1.0f * cosf(RADIANS(angle));
 	float radius = 4.5f + (float)(NUM_Z - 1) / 2.0f;
 
-	vec4 eye = vec4_init(sina * radius, -sina * radius, cosa * radius, 1.0f);
-	vec4 at = vec4_init(0.0f, 0.0f, 0.0f, 1.0f);
-	vec4 up = vec4_init(0.0f, 1.0f, 0.0f, 0.0f);
+	vec4 eye = { sina * radius, -sina * radius, cosa * radius, 1.0f }; // vec4_init(sina * radius, -sina * radius, cosa * radius, 1.0f);
+	vec4 at = { 0.0f, 0.0f, 0.0f, 1.0f }; // vec4_init(0.0f, 0.0f, 0.0f, 1.0f);
+	vec4 up = { 0.0f, 1.0f, 0.0f, 0.0f }; // vec4_init(0.0f, 1.0f, 0.0f, 0.0f);
 	mat4x4 viewMatrix = mat4x4_lookAt(eye, at, up);
 
 	const float fov = RADIANS(90.0f);
@@ -432,9 +436,11 @@ void update()
 
 	float baseRotation = (float)glfwGetTime() * 50.0f;
 	mat4x4 *instanceMatrix = &transformsBlock->modelMatrices[0];
-	vec4 rotAxis = vec4_init(0.0f, 0.0f, -1.0f, 0.0f);
+	vec4 rotAxis = { 0.0f, 0.0f, -1.0f, 0.0f }; // vec4_init(0.0f, 0.0f, -1.0f, 0.0f);
+	vec4 translation = { 0.0f, 0.0f, 0.0f, 1.0f };
 	mat4x4 transMat;
-	mat4x4_translate(vec4_init(0.0f, 0.0f, 0.0f, 1.0f), &transMat);
+//	mat4x4_translate(vec4_init(0.0f, 0.0f, 0.0f, 1.0f), &transMat);
+	mat4x4_translate(translation, &transMat);
 
 	mat4x4 rotMat;
 	mat4x4_rotate(RADIANS(-baseRotation), rotAxis, &rotMat);

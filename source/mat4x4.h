@@ -8,7 +8,7 @@ typedef struct mat4x4
 	vec4 yAxis;
 	vec4 zAxis;
 	vec4 wAxis;
-} mat4x4;
+} mat4x4 __attribute__ ((aligned(16)));
 
 #define MakeShuffleMask(x,y,z,w)           (x | (y<<2) | (z<<4) | (w<<6))
 
@@ -68,10 +68,14 @@ inline mat4x4 mat4x4_frustum(float left, float right, float bottom, float top, f
 	float D = -(2.0f * farZ * nearZ) / (farZ - nearZ);
 
 	mat4x4 res;
-	res.xAxis = vec4_init(2.0f * nearZ / (right - left), 0.0f, 0.0f, 0.0f);
-	res.yAxis = vec4_init(0.0f, 2.0f * nearZ / (top - bottom), 0.0f, 0.0f);		
-	res.zAxis = vec4_init(A, B, C, -1.0f);
-	res.wAxis = vec4_init(0.0f, 0.0f, D, 0.0);
+	vec4 xAxis = { 2.0f * nearZ / (right - left), 0.0f, 0.0f, 0.0f };
+	vec4 yAxis = { 0.0f, 2.0f * nearZ / (top - bottom), 0.0f, 0.0f };		
+	vec4 zAxis = { A, B, C, -1.0f };
+	vec4 wAxis = { 0.0f, 0.0f, D, 0.0 };
+	res.xAxis = xAxis;
+	res.yAxis = yAxis;
+	res.zAxis = zAxis;
+	res.wAxis = wAxis;
 
 	return res;
 }
@@ -86,12 +90,13 @@ inline void mat4x4_translate(vec4 translate, mat4x4 *restrict res)
 
 inline void mat4x4_rotate(float angle, vec4 axis, mat4x4 *restrict res)
 {
-	__attribute__ ((aligned(16))) float axisMem[4] = {};
-	vec4_store(axisMem, axis);
+//	__attribute__ ((aligned(16))) float axisMem[4] = {};
+//	vec4 axisMem
+//	vec4_store(axisMem, axis);
 
-	float ax = axisMem[0];
-	float ay = axisMem[1];
-	float az = axisMem[2];
+	float ax = axis[0]; //axisMem[0];
+	float ay = axis[1]; //axisMem[1];
+	float az = axis[2]; //axisMem[2];
 	float xx = ax * ax;
 	float yy = ay * ay;
 	float zz = az * az;

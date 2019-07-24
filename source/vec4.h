@@ -5,7 +5,8 @@
 //#include <x86intrin.h>
 #include <smmintrin.h>
 
-typedef __m128 vec4;
+//typedef __m128 vec4;
+typedef float vec4 __attribute__((vector_size(4 * sizeof(float))));
 
 inline vec4 vec4_init(float x, float y, float z, float w)
 {
