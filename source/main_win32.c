@@ -12,6 +12,7 @@
 #include <Memoryapi.h>
 #include "file.h"
 #include "mat4x4.h"
+#include "stretchy_buffer.h"
 #include "vec4.h"
 
 #include "mesh.h"
@@ -142,6 +143,19 @@ int main(int argc, char *argv[])
 		.a = 2,
 		.string = "A new string"
 	});
+
+	//Test Stretchy Buffer;
+
+	float *floatArray = NULL;
+	sb_push(floatArray, 1.0f);
+	sb_push(floatArray, 2.0f);
+	sb_push(floatArray, 3.0f);
+	int count = sb_count(floatArray);
+	float value1f = floatArray[0];
+	float value2f = floatArray[1];
+	float value3f = floatArray[2];
+	float last = sb_last(floatArray);
+	sb_free(floatArray);
 
 	if (!glfwInit())
 		exit(EXIT_FAILURE);
@@ -481,7 +495,7 @@ void render()
 	glUnmapBuffer(GL_SHADER_STORAGE_BUFFER);
 */
 	// Bind Visible Matrices Buffer.
-	glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, m_modelMatricesBuffer);
+//	glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, m_modelMatricesBuffer);
 	// Bind Material Buffer.
 	glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, m_materialBuffer);
 

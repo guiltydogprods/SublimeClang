@@ -4,10 +4,17 @@
 
 typedef struct mat4x4
 {
-	vec4 xAxis;
-	vec4 yAxis;
-	vec4 zAxis;
-	vec4 wAxis;
+	union 
+	{
+		struct
+		{
+			vec4 xAxis;
+			vec4 yAxis;
+			vec4 zAxis;
+			vec4 wAxis;
+		};
+		vec4 columns[4];
+	};
 } mat4x4 __attribute__ ((aligned(16)));
 
 #define MakeShuffleMask(x,y,z,w)           (x | (y<<2) | (z<<4) | (w<<6))
@@ -76,7 +83,6 @@ inline mat4x4 mat4x4_frustum(float left, float right, float bottom, float top, f
 	res.yAxis = yAxis;
 	res.zAxis = zAxis;
 	res.wAxis = wAxis;
-
 	return res;
 }
 
