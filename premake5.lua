@@ -73,7 +73,8 @@ filter "action:xcode*"
       ["GCC_WARN_UNDECLARED_SELECTOR"] = "YES";
       ["GCC_WARN_UNINITIALIZED_AUTOS"] = "YES";
       ["GCC_WARN_UNUSED_FUNCTION"] = "YES";
-
+      ["GCC_NO_COMMON_BLOCKS"] = "YES";
+      ["ENABLE_STRICT_OBJC_MSGSEND"] = "YES";
    }   
 
 
