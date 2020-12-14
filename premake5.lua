@@ -112,9 +112,9 @@ project "SublimeClang"
       defines { "_DEBUG" }
       optimize "Off"
       symbols  "Full"      
-      libdirs { "lib/Debug" }
+--      libdirs { "lib/Debug" }
 
    filter "configurations:Release"
       defines { "NDEBUG" }
       optimize "Full"
-      libdirs { "lib/Release" }
+--      libdirs { "lib/Release" }

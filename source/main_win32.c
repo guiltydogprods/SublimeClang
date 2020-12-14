@@ -123,7 +123,6 @@ int main(void)
     {
         int width, height;
         glfwGetFramebufferSize(window, &width, &height);
-        const float ratio = width / (float) height;
 
         glViewport(0, 0, width, height);
         glClear(GL_COLOR_BUFFER_BIT);
