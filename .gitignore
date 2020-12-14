@@ -1,5 +1,6 @@
 .git/
 .vs/
+.DS_Store
 bin/
 obj/
 *.make

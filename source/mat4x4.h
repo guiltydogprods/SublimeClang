@@ -1,10 +1,13 @@
 #pragma once
 
 #include "vec4.h"
+#include <math.h>
+
+#define RE_USE_SIMD
 
 typedef struct mat4x4
 {
-	union 
+	union
 	{
 		struct
 		{
@@ -13,7 +16,7 @@ typedef struct mat4x4
 			vec4 zAxis;
 			vec4 wAxis;
 		};
-		vec4 columns[4];
+		vec4 axis[4];
 	};
 } mat4x4 __attribute__ ((aligned(16)));
 
@@ -33,76 +36,155 @@ typedef struct mat4x4
 #define VecShuffle_0101(vec1, vec2)        _mm_movelh_ps(vec1, vec2)
 #define VecShuffle_2323(vec1, vec2)        _mm_movehl_ps(vec2, vec1)
 
-inline void mat4x4_orthoInverse(mat4x4 *mat, mat4x4 *invMat)
+static inline mat4x4 mat4x4_identity()
 {
+	static mat4x4 s_identity = {
+		.xAxis = (vec4) {1.0f, 0.0f, 0.0f, 0.0f},
+		.yAxis = (vec4) {0.0f, 1.0f, 0.0f, 0.0f},
+		.zAxis = (vec4) {0.0f, 0.0f, 1.0f, 0.0f},
+		.wAxis = (vec4) {0.0f, 0.0f, 0.0f, 1.0f},
+	};
+
+	return s_identity;
+}
+
+static inline mat4x4 mat4x4_orthoInverse(const mat4x4 mat)
+{
+	mat4x4 result;
+#ifdef RE_PLATFORM_WIN64
 	// transpose 3x3, we know m03 = m13 = m23 = 0
-	__m128 t0 = VecShuffle_0101(mat->xAxis, mat->yAxis); // 00, 01, 10, 11
-	__m128 t1 = VecShuffle_2323(mat->xAxis, mat->yAxis); // 02, 03, 12, 13
-	invMat->xAxis = VecShuffle(t0, mat->zAxis, 0,2,0,3); // 00, 10, 20, 23(=0)
-	invMat->yAxis = VecShuffle(t0, mat->zAxis, 1,3,1,3); // 01, 11, 21, 23(=0)
-	invMat->zAxis = VecShuffle(t1, mat->zAxis, 0,2,2,3); // 02, 12, 22, 23(=0)
+	__m128 t0 = VecShuffle_0101(mat.xAxis, mat.yAxis); // 00, 01, 10, 11
+	__m128 t1 = VecShuffle_2323(mat.xAxis, mat.yAxis); // 02, 03, 12, 13
+	result.xAxis = VecShuffle(t0, mat.zAxis, 0,2,0,3); // 00, 10, 20, 23(=0)
+	result.yAxis = VecShuffle(t0, mat.zAxis, 1,3,1,3); // 01, 11, 21, 23(=0)
+	result.zAxis = VecShuffle(t1, mat.zAxis, 0,2,2,3); // 02, 12, 22, 23(=0)
 
 	// last line
-	invMat->wAxis =                           _mm_mul_ps(invMat->xAxis, VecSwizzle1(mat->wAxis, 0));
-	invMat->wAxis = _mm_add_ps(invMat->wAxis, _mm_mul_ps(invMat->yAxis, VecSwizzle1(mat->wAxis, 1)));
-	invMat->wAxis = _mm_add_ps(invMat->wAxis, _mm_mul_ps(invMat->zAxis, VecSwizzle1(mat->wAxis, 2)));
-	invMat->wAxis = _mm_sub_ps(_mm_setr_ps(0.f, 0.f, 0.f, 1.f), invMat->wAxis);
+	result.wAxis =                           _mm_mul_ps(result.xAxis, VecSwizzle1(mat.wAxis, 0));
+	result.wAxis = _mm_add_ps(result.wAxis, _mm_mul_ps(result.yAxis, VecSwizzle1(mat.wAxis, 1)));
+	result.wAxis = _mm_add_ps(result.wAxis, _mm_mul_ps(result.zAxis, VecSwizzle1(mat.wAxis, 2)));
+	result.wAxis = _mm_sub_ps(_mm_setr_ps(0.f, 0.f, 0.f, 1.f), result.wAxis);
+#else
+	vec4 xAxis = (vec4){ mat.xAxis[0], mat.yAxis[0], mat.zAxis[0], 0.0f }; //CLR: 3x3 transpose should be SIMDfied.
+	vec4 yAxis = (vec4){ mat.xAxis[1], mat.yAxis[1], mat.zAxis[1], 0.0f };
+	vec4 zAxis = (vec4){ mat.xAxis[2], mat.yAxis[2], mat.zAxis[2], 0.0f };
+	float32x2_t w_xy = vget_low_f32(mat.wAxis);
+	float32x2_t w_zw = vget_high_f32(mat.wAxis);
+	vec4 xxxx = vdupq_lane_f32(w_xy, 0);
+	vec4 yyyy = vdupq_lane_f32(w_xy, 1);
+	vec4 zzzz = vdupq_lane_f32(w_zw, 0);
+	vec4 wAxis = xAxis * xxxx;
+	wAxis = wAxis + yAxis * yyyy;
+	wAxis = wAxis + zAxis * zzzz;
+	result.xAxis = xAxis;
+	result.yAxis = yAxis;
+	result.zAxis = zAxis;
+	result.wAxis = (vec4) {0.0f, 0.0f, 0.0f, 1.0f} - wAxis;
+#endif
+	return result;
 }
 
-inline mat4x4 mat4x4_lookAt(vec4 eye, vec4 at, vec4 up)
+static inline mat4x4 mat4x4_lookAt(const vec4 eye, const vec4 at, const vec4 up)
 {
-	const vec4 zAxis = vec4_normalize(vec4_sub(eye, at));
+	const vec4 zAxis = vec4_normalize(eye - at);
 	const vec4 xAxis = vec4_normalize(vec4_cross(up, zAxis));
 	const vec4 yAxis = vec4_cross(zAxis, xAxis);
-		
-	mat4x4 worldMatrix;
-	worldMatrix.xAxis = xAxis;
-	worldMatrix.yAxis = yAxis;
-	worldMatrix.zAxis = zAxis;
-	worldMatrix.wAxis = eye;
-		
-	mat4x4 res;
-	mat4x4_orthoInverse(&worldMatrix, &res);
-
-	return res;
+	
+	mat4x4 worldMatrix = {
+		.xAxis = xAxis,
+		.yAxis = yAxis,
+		.zAxis = zAxis,
+		.wAxis = eye
+	};
+	return mat4x4_orthoInverse(worldMatrix);
 }
 
-inline mat4x4 mat4x4_frustum(float left, float right, float bottom, float top, float nearZ, float farZ)
+static inline mat4x4 mat4x4_lookAtWorld(const vec4 eye, const vec4 at, const vec4 up)
+{
+	const vec4 zAxis = vec4_normalize(eye - at);
+	const vec4 xAxis = vec4_normalize(vec4_cross(up, zAxis));
+	const vec4 yAxis = vec4_cross(zAxis, xAxis);
+
+	return (mat4x4) {
+		.xAxis = xAxis,
+		.yAxis = yAxis,
+		.zAxis = zAxis,
+		.wAxis = eye
+	};
+}
+
+static inline mat4x4 mat4x4_create(vec4 rot, vec4 position)
+{
+	mat4x4 retVal;
+	float x = rot[0];
+	float y = rot[1];
+	float z = rot[2];
+	float w = rot[3];
+	float xx = x * x * 2.0f;
+	float yy = y * y * 2.0f;
+	float zz = z * z * 2.0f;
+	float xy = x * y * 2.0f;
+	float xz = x * z * 2.0f;
+	float yz = y * z * 2.0f;
+	float wx = w * x * 2.0f;
+	float wy = w * y * 2.0f;
+	float wz = w * z * 2.0f;
+
+	float m00 = 1.0f - yy - zz;
+	float m01 = xy + wz;
+	float m02 = xz - wy;
+	float m10 = xy - wz;
+	float m11 = 1.0f - xx - zz;
+	float m12 = yz + wx;
+	float m20 = xz + wy;
+	float m21 = yz - wx;
+	float m22 = 1.0f - xx - yy;
+
+	retVal.xAxis = (vec4) { m00, m01, m02, 0.0f };
+	retVal.yAxis = (vec4) { m10, m11, m12, 0.0f };
+	retVal.zAxis = (vec4) { m20, m21, m22, 0.0f };
+	retVal.wAxis = position;
+
+	return retVal;
+}
+
+static inline mat4x4 mat4x4_frustum(const float left, const float right, const float bottom, const float top, const float nearZ, const float farZ)
 {
 	float A = (right + left) / (right - left);
 	float B = (top + bottom) / (top - bottom);
 	float C = -(farZ + nearZ) / (farZ - nearZ);
 	float D = -(2.0f * farZ * nearZ) / (farZ - nearZ);
 
-	mat4x4 res;
 	vec4 xAxis = { 2.0f * nearZ / (right - left), 0.0f, 0.0f, 0.0f };
 	vec4 yAxis = { 0.0f, 2.0f * nearZ / (top - bottom), 0.0f, 0.0f };		
 	vec4 zAxis = { A, B, C, -1.0f };
 	vec4 wAxis = { 0.0f, 0.0f, D, 0.0 };
-	res.xAxis = xAxis;
-	res.yAxis = yAxis;
-	res.zAxis = zAxis;
-	res.wAxis = wAxis;
-	return res;
+
+	mat4x4 result;
+	result.xAxis = xAxis;
+	result.yAxis = yAxis;
+	result.zAxis = zAxis;
+	result.wAxis = wAxis;
+
+	return result;
 }
 
-inline void mat4x4_translate(vec4 translate, mat4x4 *restrict res)
+static inline mat4x4 mat4x4_translate(const vec4 translate)
 {
-	res->xAxis = vec4_init(1.0f, 0.0f, 0.0f, 0.0f);
-	res->yAxis = vec4_init(0.0f, 1.0f, 0.0f, 0.0f);
-	res->zAxis = vec4_init(0.0f, 0.0f, 1.0f, 0.0f);
-	res->wAxis = translate;
+	mat4x4 resMat;
+	resMat.xAxis = (vec4){ 1.0f, 0.0f, 0.0f, 0.0f };
+	resMat.yAxis = (vec4){ 0.0f, 1.0f, 0.0f, 0.0f };
+	resMat.zAxis = (vec4){ 0.0f, 0.0f, 1.0f, 0.0f };
+	resMat.wAxis = translate;
+
+	return resMat;
 }
 
-inline void mat4x4_rotate(float angle, vec4 axis, mat4x4 *restrict res)
+static inline mat4x4 mat4x4_rotate(const float angle, const vec4 axis)
 {
-//	__attribute__ ((aligned(16))) float axisMem[4] = {};
-//	vec4 axisMem
-//	vec4_store(axisMem, axis);
-
-	float ax = axis[0]; //axisMem[0];
-	float ay = axis[1]; //axisMem[1];
-	float az = axis[2]; //axisMem[2];
+	float ax = axis[0];
+	float ay = axis[1];
+	float az = axis[2];
 	float xx = ax * ax;
 	float yy = ay * ay;
 	float zz = az * az;
@@ -124,56 +206,64 @@ inline void mat4x4_rotate(float angle, vec4 axis, mat4x4 *restrict res)
 	float m21 = ay * az * oneMinusC - ax * sina;
 	float m22 = cosa + zz * oneMinusC;
 
-	res->xAxis = vec4_init(m00, m01, m02, 0.0f);
-	res->yAxis = vec4_init(m10, m11, m12, 0.0f);
-	res->zAxis = vec4_init(m20, m21, m22, 0.0f);
-	res->wAxis = vec4_init(0.0f, 0.0f, 0.0f, 1.0f);
+	mat4x4 result;
+	result.xAxis = (vec4) { m00, m01, m02, 0.0f };
+	result.yAxis = (vec4) { m10, m11, m12, 0.0f };
+	result.zAxis = (vec4) { m20, m21, m22, 0.0f };
+	result.wAxis = (vec4) { 0.0f, 0.0f, 0.0f, 1.0f };
+
+	return result;
 }
 
-/*
-mat4x4 mat4x4_transform(mat4x4 m, vec4 vec)
+static inline mat4x4 mat4x4_scale(const float scale)
 {
-	vec4 res, acc;
-	float x = right.X();
-			float y = right.Y();
-			float z = right.Z();
-			float w = right.W();
-	vec4 acc = m.wAxis * w;
-			acc = acc + m_zAxis * z;
-			acc = acc + m_yAxis * y;
-			res = acc + m_xAxis * x;
+	mat4x4 resMat;
+	resMat.xAxis = (vec4){ scale, 0.0f, 0.0f, 0.0f };
+	resMat.yAxis = (vec4){ 0.0f, scale, 0.0f, 0.0f };
+	resMat.zAxis = (vec4){ 0.0f, 0.0f, scale, 0.0f };
+	resMat.wAxis = (vec4){ 0.0f, 0.0f, 0.0f, 1.0f };
 
-			return res;
-
+	return resMat;
 }
-*/
 
-inline mat4x4 mat4x4_mul(float *restrict A, float *restrict B, float *restrict C)
+static inline mat4x4 mat4x4_mul(const mat4x4 A, const mat4x4 B)
 {
-	mat4x4 res;
+	mat4x4 result;
 
-	//res.m_xAxis = m1 * m2.xAxis;
-	//res.m_yAxis = m1 * m2.yAxis;
-	//res.m_zAxis = m1 * m2.zAxis;
-	//res.m_wAxis = m1 * m2.wAxis;
+	vec4 a_xAxis = A.xAxis;
+	vec4 a_yAxis = A.yAxis;
+	vec4 a_zAxis = A.zAxis;
+	vec4 a_wAxis = A.wAxis;
 
-    __m128 row1 = _mm_load_ps(&B[0]);
-    __m128 row2 = _mm_load_ps(&B[4]);
-    __m128 row3 = _mm_load_ps(&B[8]);
-    __m128 row4 = _mm_load_ps(&B[12]);
-    for(int i=0; i<4; i++) {
-        __m128 brod1 = _mm_set1_ps(A[4*i + 0]);
-        __m128 brod2 = _mm_set1_ps(A[4*i + 1]);
-        __m128 brod3 = _mm_set1_ps(A[4*i + 2]);
-        __m128 brod4 = _mm_set1_ps(A[4*i + 3]);
-        __m128 row = _mm_add_ps(
-                        _mm_add_ps(
-                        _mm_mul_ps(brod1, row1),
-                        _mm_mul_ps(brod2, row2)),
-                     _mm_add_ps(
-                        _mm_mul_ps(brod3, row3),
-                        _mm_mul_ps(brod4, row4)));
-        _mm_store_ps(&C[4*i], row);
-    }
-	return res;		
+	for (uint32_t i = 0; i < 4; ++i)
+	{
+#ifdef RE_PLATFORM_WIN64
+		const float *restrict vec = (const float *restrict)&B.axis[i];
+		vec4 b_xxxx = _mm_set1_ps(vec[0]);
+		vec4 b_yyyy = _mm_set1_ps(vec[1]);
+		vec4 b_zzzz = _mm_set1_ps(vec[2]);
+		vec4 b_wwww = _mm_set1_ps(vec[3]);
+#else
+		vec4 b_xxxx = vdupq_laneq_f32(B.axis[i], 0);
+		vec4 b_yyyy = vdupq_laneq_f32(B.axis[i], 1);
+		vec4 b_zzzz = vdupq_laneq_f32(B.axis[i], 2);
+		vec4 b_wwww = vdupq_laneq_f32(B.axis[i], 3);
+
+#endif
+		vec4 acc = a_xAxis * b_xxxx;
+		acc = acc + a_yAxis * b_yyyy;
+		acc = acc + a_zAxis * b_zzzz;
+		result.axis[i] = acc + a_wAxis * b_wwww;
+	}
+	return result;
+}
+
+static inline vec4 vec4_transform(mat4x4 mat, vec4 vec)
+{
+	vec4 acc = mat.wAxis * vec.w;
+	acc = acc + mat.zAxis * vec.z;
+	acc = acc + mat.yAxis * vec.y;
+	vec4 res = acc + mat.xAxis * vec.x;
+
+	return res;
 }

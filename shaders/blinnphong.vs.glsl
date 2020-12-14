@@ -1,20 +1,20 @@
-#version 450 core
-#extension GL_ARB_shader_draw_parameters : require
+#version 410 core
+//#extension GL_ARB_shader_draw_parameters : require
 
 layout(location = 0) in vec3 position;
 layout(location = 1) in vec3 normal;
 layout(location = 2) in vec4 texCoord;
-
-layout(binding = 0, std140) readonly buffer MODEL_MATRIX_BLOCK
-{
-	mat4    model_matrix[];
-};
 
 layout(binding = 0, std140) uniform TRANSFORM_BLOCK
 {
 	mat4    view_matrix;
 	mat4    proj_matrix;
 	mat4    view_proj_matrix;
+};
+
+layout(binding = 1, std140) uniform MODEL_MATRIX_BLOCK
+{
+	mat4    model_matrix[16];
 };
 
 out VS_OUT
@@ -29,7 +29,7 @@ uniform vec3 light_pos = vec3(100.0, 100.0, 100.0);
 
 void main(void)
 {
-	mat4 mv_matrix = view_matrix * model_matrix[gl_DrawIDARB];
+	mat4 mv_matrix = view_matrix * model_matrix[0];
 	vec4 P = mv_matrix * vec4(position, 1.0);
 
     vs_out.N = mat3(mv_matrix) * normal;
@@ -38,6 +38,6 @@ void main(void)
 
     vs_out.V = -P.xyz;
 
-	vs_out.material_id = gl_BaseInstanceARB;
+	vs_out.material_id = 0; //gl_BaseInstanceARB;
 	gl_Position = proj_matrix * P;
 }

@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include <string.h>
 #include <math.h>
 #include "mat4x4.h"

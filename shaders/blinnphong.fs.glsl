@@ -1,4 +1,4 @@
-#version 450 core
+#version 410 core
 
 // Output
 layout (location = 0) out vec4 color;
@@ -15,21 +15,20 @@ in VS_OUT
 struct MaterialProperties
 {
 	vec4 diffuse;
-	vec3 specular;
-	float specularPower;
+	vec4 specular;
 };
 
 // Material properties
-layout (std430, binding = 1) readonly buffer MATERIALS
+layout (std140, binding = 2) uniform MATERIALS
 {
-	MaterialProperties materials[];
+	MaterialProperties materials[16];
 };
 
 void main(void)
 {
 	vec3 Kd = materials[fs_in.material_id].diffuse.xyz;
-	vec3 Ks = materials[fs_in.material_id].specular;
-	float m = materials[fs_in.material_id].specularPower;
+	vec3 Ks = materials[fs_in.material_id].specular.xyz;
+	float m = materials[fs_in.material_id].specular.w;
 
     vec3 n = normalize(fs_in.N);
     vec3 l = normalize(fs_in.L);
