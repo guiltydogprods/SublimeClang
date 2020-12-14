@@ -16,11 +16,11 @@
 
 /* Begin PBXFileReference section */
 		1440675EB72E8E1046546D9E /* glad_gl.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = glad_gl.c; path = source/glad_gl.c; sourceTree = "<group>"; };
-		49EB923F4A9E8F31BE80607F /* SublimeClang */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = SublimeClang; path = SublimeClang; sourceTree = BUILT_PRODUCTS_DIR; };
+		49EB923F4A9E8F31BE80607F /* SublimeClang */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SublimeClang; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BE1C884EF2D51B609FE1EC4 /* mesh.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = mesh.c; path = source/mesh.c; sourceTree = "<group>"; };
 		5C2051B85F9123EAE0FDC7F8 /* mat4x4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = mat4x4.h; path = source/mat4x4.h; sourceTree = "<group>"; };
 		7CA167CE1FECF1003ABDBE0E /* mesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = mesh.h; path = source/mesh.h; sourceTree = "<group>"; };
-		7F11C5CD7EB4A8FFB9095C0D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks//Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		7F11C5CD7EB4A8FFB9095C0D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = "System/Library/Frameworks//Library/Frameworks/OpenGL.framework"; sourceTree = SDKROOT; };
 		8A122B58D2830F8A1721E198 /* main_win32.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = main_win32.c; path = source/main_win32.c; sourceTree = "<group>"; };
 		97FCCBAA3B4854DC561921EA /* file.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = file.c; path = source/file.c; sourceTree = "<group>"; };
 		990D69EE3BFB90A0CB21702E /* linmath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = linmath.h; path = source/linmath.h; sourceTree = "<group>"; };
@@ -102,9 +102,16 @@
 /* Begin PBXProject section */
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = 1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "SublimeClang" */;
 			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+				Base,
+			);
 			mainGroup = 345DDE76E0C09EA89F4914B6 /* SublimeClang */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -138,90 +145,37 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		2407D33F24BAD031989CA17F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = (
-					"c++11",
-				);
-				CLANG_CXX_LIBRARY = (
-					"libc++",
-				);
-				CLANG_ENABLE_OBJC_WEAK = (
-					YES,
-				);
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = (
-					YES,
-				);
-				CLANG_WARN_BOOL_CONVERSION = (
-					YES,
-				);
-				CLANG_WARN_COMMA = (
-					YES,
-				);
-				CLANG_WARN_CONSTANT_CONVERSION = (
-					YES,
-				);
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = (
-					YES,
-				);
-				CLANG_WARN_EMPTY_BODY = (
-					YES,
-				);
-				CLANG_WARN_ENUM_CONVERSION = (
-					YES,
-				);
-				CLANG_WARN_INFINITE_RECURSION = (
-					YES,
-				);
-				CLANG_WARN_INT_CONVERSION = (
-					YES,
-				);
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = (
-					YES,
-				);
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = (
-					YES,
-				);
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = (
-					YES,
-				);
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = (
-					YES,
-				);
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = (
-					YES,
-				);
-				CLANG_WARN_STRICT_PROTOTYPES = (
-					YES,
-				);
-				CLANG_WARN_SUSPICIOUS_MOVE = (
-					YES,
-				);
-				CLANG_WARN_UNREACHABLE_CODE = (
-					YES,
-				);
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = (
-					YES,
-				);
-				CODE_SIGN_IDENTITY = (
-					"-",
-				);
+				CLANG_CXX_LANGUAGE_STANDARD = "c++11";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
 				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
 				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
-				ENABLE_STRICT_OBJC_MSGSEND = (
-					YES,
-				);
-				GCC_C_LANGUAGE_STANDARD = (
-					c11,
-				);
-				GCC_NO_COMMON_BLOCKS = (
-					YES,
-				);
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = c11;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = fast;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_CRT_SECURE_NO_WARNINGS,
@@ -231,19 +185,11 @@
 					NDEBUG,
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = (
-					YES,
-				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = (
-					YES,
-				);
-				GCC_WARN_UNINITIALIZED_AUTOS = (
-					YES,
-				);
-				GCC_WARN_UNUSED_FUNCTION = (
-					YES,
-				);
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					"external/glfw-3.3/include",
@@ -259,108 +205,67 @@
 				OBJROOT = obj/arm64/Release;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
-					"-Xclang -flto-visibility-public-std -fblocks",
-					"-std=c11 -gno-column-info -ffast-math -Xclang -flto-visibility-public-std",
+					"-Xclang",
+					"-flto-visibility-public-std",
+					"-fblocks",
+					"-std=c11",
+					"-gno-column-info",
+					"-ffast-math",
+					"-Xclang",
+					"-flto-visibility-public-std",
 				);
 				OTHER_LDFLAGS = (
 					"-lglfw3",
-					"-g -gno-column-info -framework OpenGL -framework Cocoa -framework IOKit -framework CoreFoundation",
-				);
-				SDKROOT = (
-					macosx,
-				);
-				SYMROOT = bin/Release;
-				USER_HEADER_SEARCH_PATHS = (
-					.,
-				);
-				VALIDATE_WORKSPACE_SKIPPED_SDK_FRAMEWORKS = (
+					"-g",
+					"-gno-column-info",
+					"-framework",
 					OpenGL,
+					"-framework",
+					Cocoa,
+					"-framework",
+					IOKit,
+					"-framework",
+					CoreFoundation,
 				);
-				WARNING_CFLAGS = "-Wall -Wextra";
+				SDKROOT = macosx;
+				SYMROOT = bin/Release;
+				USER_HEADER_SEARCH_PATHS = .;
+				VALIDATE_WORKSPACE_SKIPPED_SDK_FRAMEWORKS = OpenGL;
 			};
 			name = Release;
 		};
 		2AD3F3C59C5F0C374B603205 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = (
-					"c++11",
-				);
-				CLANG_CXX_LIBRARY = (
-					"libc++",
-				);
-				CLANG_ENABLE_OBJC_WEAK = (
-					YES,
-				);
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = (
-					YES,
-				);
-				CLANG_WARN_BOOL_CONVERSION = (
-					YES,
-				);
-				CLANG_WARN_COMMA = (
-					YES,
-				);
-				CLANG_WARN_CONSTANT_CONVERSION = (
-					YES,
-				);
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = (
-					YES,
-				);
-				CLANG_WARN_EMPTY_BODY = (
-					YES,
-				);
-				CLANG_WARN_ENUM_CONVERSION = (
-					YES,
-				);
-				CLANG_WARN_INFINITE_RECURSION = (
-					YES,
-				);
-				CLANG_WARN_INT_CONVERSION = (
-					YES,
-				);
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = (
-					YES,
-				);
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = (
-					YES,
-				);
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = (
-					YES,
-				);
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = (
-					YES,
-				);
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = (
-					YES,
-				);
-				CLANG_WARN_STRICT_PROTOTYPES = (
-					YES,
-				);
-				CLANG_WARN_SUSPICIOUS_MOVE = (
-					YES,
-				);
-				CLANG_WARN_UNREACHABLE_CODE = (
-					YES,
-				);
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = (
-					YES,
-				);
-				CODE_SIGN_IDENTITY = (
-					"-",
-				);
+				CLANG_CXX_LANGUAGE_STANDARD = "c++11";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
 				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
 				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
 				COPY_PHASE_STRIP = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = (
-					YES,
-				);
-				GCC_C_LANGUAGE_STANDARD = (
-					c11,
-				);
-				GCC_NO_COMMON_BLOCKS = (
-					YES,
-				);
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = c11;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_CRT_SECURE_NO_WARNINGS,
@@ -370,19 +275,11 @@
 					_DEBUG,
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = (
-					YES,
-				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = (
-					YES,
-				);
-				GCC_WARN_UNINITIALIZED_AUTOS = (
-					YES,
-				);
-				GCC_WARN_UNUSED_FUNCTION = (
-					YES,
-				);
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					"external/glfw-3.3/include",
@@ -398,24 +295,32 @@
 				OBJROOT = obj/arm64/Debug;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
-					"-Xclang -flto-visibility-public-std -fblocks",
-					"-std=c11 -gno-column-info -ffast-math -Xclang -flto-visibility-public-std",
+					"-Xclang",
+					"-flto-visibility-public-std",
+					"-fblocks",
+					"-std=c11",
+					"-gno-column-info",
+					"-ffast-math",
+					"-Xclang",
+					"-flto-visibility-public-std",
 				);
 				OTHER_LDFLAGS = (
 					"-lglfw3",
-					"-g -gno-column-info -framework OpenGL -framework Cocoa -framework IOKit -framework CoreFoundation",
-				);
-				SDKROOT = (
-					macosx,
-				);
-				SYMROOT = bin/Debug;
-				USER_HEADER_SEARCH_PATHS = (
-					.,
-				);
-				VALIDATE_WORKSPACE_SKIPPED_SDK_FRAMEWORKS = (
+					"-g",
+					"-gno-column-info",
+					"-framework",
 					OpenGL,
+					"-framework",
+					Cocoa,
+					"-framework",
+					IOKit,
+					"-framework",
+					CoreFoundation,
 				);
-				WARNING_CFLAGS = "-Wall -Wextra";
+				SDKROOT = macosx;
+				SYMROOT = bin/Debug;
+				USER_HEADER_SEARCH_PATHS = .;
+				VALIDATE_WORKSPACE_SKIPPED_SDK_FRAMEWORKS = OpenGL;
 			};
 			name = Debug;
 		};
@@ -423,104 +328,42 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = (
-					"c++11",
-				);
-				CLANG_CXX_LIBRARY = (
-					"libc++",
-				);
-				CLANG_ENABLE_OBJC_WEAK = (
-					YES,
-				);
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = (
-					YES,
-				);
-				CLANG_WARN_BOOL_CONVERSION = (
-					YES,
-				);
-				CLANG_WARN_COMMA = (
-					YES,
-				);
-				CLANG_WARN_CONSTANT_CONVERSION = (
-					YES,
-				);
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = (
-					YES,
-				);
-				CLANG_WARN_EMPTY_BODY = (
-					YES,
-				);
-				CLANG_WARN_ENUM_CONVERSION = (
-					YES,
-				);
-				CLANG_WARN_INFINITE_RECURSION = (
-					YES,
-				);
-				CLANG_WARN_INT_CONVERSION = (
-					YES,
-				);
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = (
-					YES,
-				);
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = (
-					YES,
-				);
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = (
-					YES,
-				);
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = (
-					YES,
-				);
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = (
-					YES,
-				);
-				CLANG_WARN_STRICT_PROTOTYPES = (
-					YES,
-				);
-				CLANG_WARN_SUSPICIOUS_MOVE = (
-					YES,
-				);
-				CLANG_WARN_UNREACHABLE_CODE = (
-					YES,
-				);
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = (
-					YES,
-				);
-				CODE_SIGN_IDENTITY = (
-					"-",
-				);
+				CLANG_CXX_LANGUAGE_STANDARD = "c++11";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
 				CONFIGURATION_BUILD_DIR = bin/Release;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_STRICT_OBJC_MSGSEND = (
-					YES,
-				);
-				GCC_C_LANGUAGE_STANDARD = (
-					c11,
-				);
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = (
-					YES,
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = (
-					YES,
-				);
-				GCC_WARN_UNDECLARED_SELECTOR = (
-					YES,
-				);
-				GCC_WARN_UNINITIALIZED_AUTOS = (
-					YES,
-				);
-				GCC_WARN_UNUSED_FUNCTION = (
-					YES,
-				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				INSTALL_PATH = /usr/local/bin;
 				PRODUCT_NAME = SublimeClang;
-				SDKROOT = (
-					macosx,
-				);
-				VALIDATE_WORKSPACE_SKIPPED_SDK_FRAMEWORKS = (
-					OpenGL,
-				);
+				SDKROOT = macosx;
+				VALIDATE_WORKSPACE_SKIPPED_SDK_FRAMEWORKS = OpenGL;
 			};
 			name = Release;
 		};
@@ -528,104 +371,43 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = (
-					"c++11",
-				);
-				CLANG_CXX_LIBRARY = (
-					"libc++",
-				);
-				CLANG_ENABLE_OBJC_WEAK = (
-					YES,
-				);
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = (
-					YES,
-				);
-				CLANG_WARN_BOOL_CONVERSION = (
-					YES,
-				);
-				CLANG_WARN_COMMA = (
-					YES,
-				);
-				CLANG_WARN_CONSTANT_CONVERSION = (
-					YES,
-				);
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = (
-					YES,
-				);
-				CLANG_WARN_EMPTY_BODY = (
-					YES,
-				);
-				CLANG_WARN_ENUM_CONVERSION = (
-					YES,
-				);
-				CLANG_WARN_INFINITE_RECURSION = (
-					YES,
-				);
-				CLANG_WARN_INT_CONVERSION = (
-					YES,
-				);
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = (
-					YES,
-				);
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = (
-					YES,
-				);
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = (
-					YES,
-				);
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = (
-					YES,
-				);
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = (
-					YES,
-				);
-				CLANG_WARN_STRICT_PROTOTYPES = (
-					YES,
-				);
-				CLANG_WARN_SUSPICIOUS_MOVE = (
-					YES,
-				);
-				CLANG_WARN_UNREACHABLE_CODE = (
-					YES,
-				);
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = (
-					YES,
-				);
-				CODE_SIGN_IDENTITY = (
-					"-",
-				);
+				CLANG_CXX_LANGUAGE_STANDARD = "c++11";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
 				CONFIGURATION_BUILD_DIR = bin/Debug;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_STRICT_OBJC_MSGSEND = (
-					YES,
-				);
-				GCC_C_LANGUAGE_STANDARD = (
-					c11,
-				);
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = (
-					YES,
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = (
-					YES,
-				);
-				GCC_WARN_UNDECLARED_SELECTOR = (
-					YES,
-				);
-				GCC_WARN_UNINITIALIZED_AUTOS = (
-					YES,
-				);
-				GCC_WARN_UNUSED_FUNCTION = (
-					YES,
-				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				INSTALL_PATH = /usr/local/bin;
 				PRODUCT_NAME = SublimeClang;
-				SDKROOT = (
-					macosx,
-				);
-				VALIDATE_WORKSPACE_SKIPPED_SDK_FRAMEWORKS = (
-					OpenGL,
-				);
+				SDKROOT = macosx;
+				VALIDATE_WORKSPACE_SKIPPED_SDK_FRAMEWORKS = OpenGL;
 			};
 			name = Debug;
 		};
@@ -655,6 +437,6 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
-};
-rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
 }

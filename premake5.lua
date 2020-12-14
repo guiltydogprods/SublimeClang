@@ -40,7 +40,6 @@ filter "action:xcode*"
    architecture "ARM64"  
    vectorextensions "NEON"
    defines { "ARM64", "RE_PLATFORM_MACOS" }
-   warnings "Extra"
 
    xcodebuildsettings
    {
@@ -77,6 +76,11 @@ filter "action:xcode*"
       ["ENABLE_STRICT_OBJC_MSGSEND"] = "YES";
    }   
 
+filter { "action:xcode*", "configurations:Debug" }
+   xcodebuildsettings
+   {
+      ["ENABLE_TESTABILITY"] = "YES";
+   } 
 
 project "SublimeClang"
    location "."
