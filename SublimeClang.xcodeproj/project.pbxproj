@@ -201,6 +201,9 @@
 				USER_HEADER_SEARCH_PATHS = (
 					.,
 				);
+				VALIDATE_WORKSPACE_SKIPPED_SDK_FRAMEWORKS = (
+					OpenGL,
+				);
 				WARNING_CFLAGS = "-Wall -Wextra";
 			};
 			name = Release;
@@ -265,6 +268,9 @@
 				USER_HEADER_SEARCH_PATHS = (
 					.,
 				);
+				VALIDATE_WORKSPACE_SKIPPED_SDK_FRAMEWORKS = (
+					OpenGL,
+				);
 				WARNING_CFLAGS = "-Wall -Wextra";
 			};
 			name = Debug;
@@ -296,6 +302,9 @@
 				SDKROOT = (
 					macosx,
 				);
+				VALIDATE_WORKSPACE_SKIPPED_SDK_FRAMEWORKS = (
+					OpenGL,
+				);
 			};
 			name = Release;
 		};
@@ -325,6 +334,9 @@
 				PRODUCT_NAME = SublimeClang;
 				SDKROOT = (
 					macosx,
+				);
+				VALIDATE_WORKSPACE_SKIPPED_SDK_FRAMEWORKS = (
+					OpenGL,
 				);
 			};
 			name = Debug;

@@ -41,7 +41,7 @@ filter "action:xcode*"
    vectorextensions "NEON"
    defines { "ARM64", "RE_PLATFORM_MACOS" }
    warnings "Extra"
-   
+
    xcodebuildsettings
    {
       ["GCC_C_LANGUAGE_STANDARD"] = "c11";         
@@ -50,6 +50,7 @@ filter "action:xcode*"
       ["SDKROOT"] = "macosx";
       ["CLANG_ENABLE_OBJC_WEAK"] = "YES";
       ["CODE_SIGN_IDENTITY"] = "-";                      --iphoneos";  
+      ["VALIDATE_WORKSPACE_SKIPPED_SDK_FRAMEWORKS"] = "OpenGL";
    }   
 
 
